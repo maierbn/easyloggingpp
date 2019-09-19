@@ -2022,6 +2022,10 @@ void VRegistry::setModules(const char* modules) {
 }
 
 bool VRegistry::allowed(base::type::VerboseLevel vlevel, const char* file) {
+// this function is used to check whether VLOG is enabled, disable if in release mode
+#ifdef NDEBUG
+  return false;
+#else
   base::threading::ScopedLock scopedLock(lock());
   if (m_modules.empty() || file == nullptr) {
     return vlevel <= m_level;
@@ -2039,6 +2043,7 @@ bool VRegistry::allowed(base::type::VerboseLevel vlevel, const char* file) {
     }
     return false;
   }
+#endif
 }
 
 void VRegistry::setFromArgs(const base::utils::CommandLineArgs* commandLineArgs) {
