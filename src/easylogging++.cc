@@ -1981,6 +1981,8 @@ void VRegistry::setModules(const char* modules) {
       addSuffix(ss, ".hpp", ".hxx");
       m_modules.insert(std::make_pair(ss.str(), level));
       addSuffix(ss, ".hh", ".hpp");
+      m_modules.insert(std::make_pair(ss.str(), level));
+      addSuffix(ss, ".tpp", ".hh");
     }
     m_modules.insert(std::make_pair(ss.str(), level));
   };

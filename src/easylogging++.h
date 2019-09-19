@@ -393,6 +393,12 @@ ELPP_INTERNAL_DEBUGGING_OUT_INFO << ELPP_INTERNAL_DEBUGGING_MSG(internalInfoStre
 #include <sstream>
 #include <memory>
 #include <type_traits>
+#if __cplusplus >= 201103L
+__attribute__((weak))
+void operator delete(void * ptr, std::size_t){ ::operator delete(ptr);}
+__attribute__((weak))
+void operator delete[](void * ptr, std::size_t){ ::operator delete(ptr);}
+#endif
 #if ELPP_THREADING_ENABLED
 #  if ELPP_USE_STD_THREADING
 #      include <mutex>
